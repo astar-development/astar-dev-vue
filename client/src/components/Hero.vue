@@ -25,7 +25,7 @@ const navItems: { label: string; href: string }[] = [
     </div>
 
     <div class="hero__content">
-      <p class="hero__eyebrow">PRECISION / CHAOS</p>
+      <p class="hero__eyebrow">PRECISION // CHAOS</p>
       <h1 class="hero__title">Production-grade .NET systems, tuned like a great live set.</h1>
       <p class="hero__subtitle">
         AStar Development blends TDD discipline with the energy of a stadium show. Reliability with real
@@ -136,10 +136,11 @@ const navItems: { label: string; href: string }[] = [
 
 .hero__eyebrow {
   margin-bottom: 14px;
-  letter-spacing: 0.18em;
-  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  font-size: 0.65rem;
   font-weight: 700;
-  color: #2dd4bf;
+  color: #f0abfc;
+  text-transform: uppercase;
 }
 
 .hero__tags {
