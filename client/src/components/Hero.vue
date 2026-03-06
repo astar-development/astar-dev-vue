@@ -12,7 +12,7 @@ const navItems: { label: string; href: string }[] = [
   <header class="hero">
     <div class="topbar">
       <div class="topbar__brand">
-        <span class="topbar__logo"><img src="astar.png" alt="AStar"/></span>
+        <span class="topbar__logo"><img src="./../../public/astar.png" alt="AStar" style="width:50px; height: 50px;" /></span>
         <div>
           <p class="topbar__title">AStar Development</p>
           <p class="topbar__subtitle">Architecture, pipelines, observability</p>
@@ -79,8 +79,6 @@ const navItems: { label: string; href: string }[] = [
   height: 34px;
   border-radius: 10px;
   font-weight: 700;
-  color: #0f1a26;
-  background: linear-gradient(135deg, #2dd4bf 0%, #fb923c 100%);
 }
 
 .topbar__title {
