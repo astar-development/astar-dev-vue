@@ -22,10 +22,14 @@ import Footer from './components/Footer.vue'
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0d1117;
-  color: #e6edf3;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: #08131f;
+  color: #e8f1fa;
   line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .app {

@@ -1,23 +1,46 @@
 <script setup lang="ts">
-const title: string = 'Welcome to Astar Dev'
-const subtitle: string =
-  'A modern web application built with Vue 3, Express, and TypeScript.'
+const navItems: { label: string; href: string }[] = [
+  { label: 'Services', href: '#services' },
+  { label: 'NuGet', href: '#packages' },
+  { label: 'Setlist', href: '#tracks' },
+  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'Contact', href: '#contact' },
+]
 </script>
 
 <template>
   <header class="hero">
+    <div class="topbar">
+      <div class="topbar__brand">
+        <span class="topbar__logo">*</span>
+        <div>
+          <p class="topbar__title">AStar Development</p>
+          <p class="topbar__subtitle">Architecture, pipelines, observability</p>
+        </div>
+      </div>
+
+      <nav class="topbar__nav" aria-label="Primary">
+        <a v-for="item in navItems" :key="item.label" :href="item.href" class="topbar__link">{{ item.label }}</a>
+      </nav>
+    </div>
+
     <div class="hero__content">
-      <div class="hero__badge">⭐ Powered by Vue 3 + TypeScript</div>
-      <h1 class="hero__title">{{ title }}</h1>
-      <p class="hero__subtitle">{{ subtitle }}</p>
+      <p class="hero__eyebrow">PRECISION / CHAOS</p>
+      <h1 class="hero__title">Production-grade .NET systems, tuned like a great live set.</h1>
+      <p class="hero__subtitle">
+        AStar Development blends TDD discipline with the energy of a stadium show. Reliability with real
+        personality.
+      </p>
+
+      <div class="hero__tags">
+        <span class="hero__tag">TDD or it did not happen</span>
+        <span class="hero__tag">Clean code, loud playlists</span>
+        <span class="hero__tag">Observability as a lifestyle</span>
+      </div>
+
       <div class="hero__actions">
-        <a
-          href="https://github.com/astar-development/astar-dev-vue"
-          class="btn btn--primary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >View on GitHub</a>
-        <a href="#features" class="btn btn--secondary">Learn More</a>
+        <a href="#services" class="btn btn--primary">Explore services</a>
+        <a href="#contact" class="btn btn--secondary">Start a conversation</a>
       </div>
     </div>
   </header>
@@ -25,78 +48,164 @@ const subtitle: string =
 
 <style scoped>
 .hero {
-  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
-  border-bottom: 1px solid #30363d;
-  padding: 80px 24px;
-  text-align: center;
+  border-bottom: 1px solid #26303d;
+  padding: 24px 24px 84px;
+  background:
+    radial-gradient(circle at 86% 9%, rgba(45, 212, 191, 0.18), transparent 30%),
+    radial-gradient(circle at 5% 0%, rgba(251, 146, 60, 0.18), transparent 30%),
+    linear-gradient(165deg, #09131f 0%, #07121d 50%, #0f1a26 100%);
+}
+
+.topbar {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #0f1a26;
+  background: linear-gradient(135deg, #2dd4bf 0%, #fb923c 100%);
+}
+
+.topbar__title {
+  color: #f3f6fb;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.topbar__subtitle {
+  color: #89a0b6;
+  font-size: 0.78rem;
+}
+
+.topbar__nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.topbar__link {
+  color: #b8cadb;
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.topbar__link:hover {
+  color: #2dd4bf;
 }
 
 .hero__content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.hero__badge {
-  display: inline-block;
-  background: rgba(88, 166, 255, 0.1);
-  border: 1px solid rgba(88, 166, 255, 0.3);
-  color: #58a6ff;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 24px;
-  letter-spacing: 0.5px;
+  max-width: 920px;
+  margin: 56px auto 0;
+  text-align: center;
 }
 
 .hero__title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
   font-weight: 700;
-  color: #f0f6fc;
+  color: #f3f6fb;
   line-height: 1.2;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .hero__subtitle {
-  font-size: 1.15rem;
-  color: #8b949e;
-  margin-bottom: 40px;
-  max-width: 600px;
+  font-size: 1.08rem;
+  color: #b5c5d5;
+  margin-bottom: 24px;
+  max-width: 720px;
   margin-left: auto;
   margin-right: auto;
 }
 
+.hero__eyebrow {
+  margin-bottom: 14px;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2dd4bf;
+}
+
+.hero__tags {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.hero__tag {
+  border: 1px solid #324255;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  color: #c9d7e4;
+  background: rgba(12, 24, 35, 0.8);
+}
+
 .hero__actions {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .btn {
   display: inline-block;
-  padding: 12px 28px;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
 }
 
 .btn:hover {
   transform: translateY(-1px);
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .btn--primary {
-  background: #238636;
-  color: #ffffff;
-  border: 1px solid #2ea043;
+  background: #2dd4bf;
+  color: #0f1a26;
+  border: 1px solid #5de0d0;
 }
 
 .btn--secondary {
   background: transparent;
-  color: #58a6ff;
-  border: 1px solid #30363d;
+  color: #d6e5f4;
+  border: 1px solid #3a4a5d;
+}
+
+.btn--secondary:hover {
+  border-color: #2dd4bf;
+}
+
+@media (max-width: 860px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topbar__nav {
+    width: 100%;
+    gap: 12px;
+  }
 }
 </style>

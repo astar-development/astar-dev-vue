@@ -5,22 +5,21 @@ const year: number = new Date().getFullYear()
 <template>
   <footer class="footer">
     <p class="footer__text">
-      &copy; {{ year }} Astar Dev &mdash; Built with Vue 3, Express &amp; TypeScript.
-      Deployed to Azure via GitHub Actions.
+      &copy; {{ year }} AStar Development. Production-grade architecture, pipelines, and observability.
     </p>
   </footer>
 </template>
 
 <style scoped>
 .footer {
-  background: #161b22;
-  border-top: 1px solid #30363d;
+  background: #0a1a2a;
+  border-top: 1px solid #26303d;
   padding: 24px;
   text-align: center;
 }
 
 .footer__text {
-  color: #8b949e;
+  color: #9db2c6;
   font-size: 0.9rem;
 }
 </style>
