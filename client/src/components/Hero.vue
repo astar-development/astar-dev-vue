@@ -17,7 +17,7 @@ const navItems: { label: string; href: string }[] = [
         </span>
         <div>
           <p class="topbar__title">AStar Development</p>
-          <p class="topbar__subtitle">Architecture, pipelines, and observability with real momentum</p>
+          <p class="topbar__subtitle">Architecture, software, pipelines, and observability with real momentum</p>
         </div>
       </div>
 
@@ -36,14 +36,21 @@ const navItems: { label: string; href: string }[] = [
       </h1>
 
       <p class="hero__subtitle">
-        Architecture, pipelines, and observability shaped for real teams and real constraints.
+        Architecture, software, pipelines, and observability shaped for real teams and real constraints.
         Enough energy to move fast, enough discipline to stay reliable.
+        AStar Development blends TDD discipline with the energy of a stadium show. Reliability with real
+        personality.
+      </p>
+
+      <p class="hero__subtitle">
+        AStar Development blends TDD discipline with the energy of a stadium show.
+        Metallica-level reliability and speed. Blackpink-level polish and precision.
       </p>
 
       <div class="hero__tags">
-        <span class="hero__tag">Tests that shape design</span>
-        <span class="hero__tag">Boundaries you can reason about</span>
-        <span class="hero__tag">Signals over guesswork</span>
+        <span class="hero__tag">TDD - Tests that shape design</span>
+        <span class="hero__tag">Clean code - Boundaries you can reason about</span>
+        <span class="hero__tag">Observability as a lifestyle - Signals over guesswork</span>
       </div>
 
       <div class="hero__actions">
