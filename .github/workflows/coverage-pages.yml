@@ -1,0 +1,42 @@
+name: Publish Coverage
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install
+
+      - run: npm run test:coverage --workspace=client
+      - run: npm run test:coverage --workspace=server || echo "No server tests"
+
+      - name: Prepare coverage site
+        run: |
+          mkdir coverage-site
+          cp -r client/coverage coverage-site/client
+          cp -r server/coverage coverage-site/server || true
+
+      - name: Upload coverage artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: coverage-site
+
+  deploy:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/deploy-pages@v4
