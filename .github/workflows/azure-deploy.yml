@@ -45,8 +45,14 @@ jobs:
           # Copy the root lock file for reproducible installs
           cp package-lock.json deploy/
           # Copy built client into expected location relative to server dist
-          mkdir -p deploy/client
-          cp -r client/dist deploy/client/dist
+          mkdir -p deploy/client/dist
+          cp -r client/dist/. deploy/client/dist/
+
+          # Validate packaged frontend exists before continuing
+          test -f deploy/client/dist/index.html
+
+          # Print a compact artifact tree for troubleshooting deployment layout
+          find deploy -maxdepth 3 -type f | sort
           # Write a minimal package.json for the Azure Web App root
           cat > deploy/package.json << 'EOF'
           {
@@ -90,6 +96,12 @@ jobs:
         with:
           name: webapp-build
           path: deploy/
+
+      - name: Validate downloaded artifact layout
+        run: |
+          test -f deploy/client/dist/index.html
+          test -f deploy/dist/index.js
+          find deploy -maxdepth 3 -type f | sort
 
       - name: Deploy to Azure Web App
         id: deploy

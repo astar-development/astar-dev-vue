@@ -40,6 +40,10 @@ app.get('/api/health', (_req: Request, res: Response): void => {
 
 // Serve the compiled Vue frontend
 const clientDistCandidates = [
+  // Preferred for Azure/App Service: runtime CWD usually /home/site/wwwroot
+  path.resolve(process.cwd(), 'client/dist'),
+  // Alternate runtime CWD if app root is one level above wwwroot
+  path.resolve(process.cwd(), 'wwwroot/client/dist'),
   // Local monorepo run: server/dist -> ../../client/dist
   path.resolve(__dirname, '../../client/dist'),
   // Azure deploy artifact run: dist -> ../client/dist
@@ -48,12 +52,23 @@ const clientDistCandidates = [
 
 const clientDist =
   clientDistCandidates.find((candidate) => fs.existsSync(path.join(candidate, 'index.html'))) ??
-  clientDistCandidates[0]
+  ''
 
-app.use(express.static(clientDist))
+if (clientDist) {
+  app.use(express.static(clientDist))
+}
 
 // Fall back to index.html for client-side routing
 app.get('*', (_req: Request, res: Response): void => {
+  if (!clientDist) {
+    res.status(503).json({
+      error: 'Frontend Not Available',
+      message: 'No built frontend found. Expected index.html in one of the candidate paths.',
+      candidates: clientDistCandidates,
+    })
+    return
+  }
+
   res.sendFile(path.join(clientDist, 'index.html'))
 })
 
