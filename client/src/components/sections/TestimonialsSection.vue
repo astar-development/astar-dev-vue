@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
   <section id="testimonials" class="section section--solid section--top-border">
     <div class="container">
       <div class="section__head">
-        <h2>Liner Notes</h2>
+        <h2>What teams say</h2>
         <p>Feedback from teams who wanted fewer surprises and more confidence in production.</p>
       </div>
 

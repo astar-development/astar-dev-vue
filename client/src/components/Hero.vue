@@ -12,34 +12,42 @@ const navItems: { label: string; href: string }[] = [
   <header class="hero">
     <div class="topbar">
       <div class="topbar__brand">
-        <span class="topbar__logo"><img src="./../../public/astar.png" alt="AStar" style="width:50px; height: 50px;" /></span>
+        <span class="topbar__logo">
+          <img src="./../../public/astar.png" alt="AStar" style="width:50px; height: 50px;" />
+        </span>
         <div>
           <p class="topbar__title">AStar Development</p>
-          <p class="topbar__subtitle">Architecture, pipelines, observability</p>
+          <p class="topbar__subtitle">Architecture, pipelines, and observability with real momentum</p>
         </div>
       </div>
 
       <nav class="topbar__nav" aria-label="Primary">
-        <a v-for="item in navItems" :key="item.label" :href="item.href" class="topbar__link">{{ item.label }}</a>
+        <a v-for="item in navItems" :key="item.label" :href="item.href" class="topbar__link">
+          {{ item.label }}
+        </a>
       </nav>
     </div>
 
     <div class="hero__content">
-      <p class="hero__eyebrow">PRECISION // CHAOS</p>
-      <h1 class="hero__title">Production-grade .NET systems, tuned like a great live set.</h1>
+      <p class="hero__eyebrow">PRODUCTION // CLARITY</p>
+
+      <h1 class="hero__title">
+        Production‑grade .NET systems, designed to stay calm under load.
+      </h1>
+
       <p class="hero__subtitle">
-        AStar Development blends TDD discipline with the energy of a stadium show. Reliability with real
-        personality.
+        Architecture, pipelines, and observability shaped for real teams and real constraints.
+        Enough energy to move fast, enough discipline to stay reliable.
       </p>
 
       <div class="hero__tags">
-        <span class="hero__tag">TDD or it did not happen</span>
-        <span class="hero__tag">Clean code, loud playlists</span>
-        <span class="hero__tag">Observability as a lifestyle</span>
+        <span class="hero__tag">Tests that shape design</span>
+        <span class="hero__tag">Boundaries you can reason about</span>
+        <span class="hero__tag">Signals over guesswork</span>
       </div>
 
       <div class="hero__actions">
-        <a href="#services" class="btn btn--primary">Explore services</a>
+        <a href="#services" class="btn btn--secondary">Explore services</a>
         <a href="#contact" class="btn btn--secondary">Start a conversation</a>
       </div>
     </div>

@@ -2,10 +2,9 @@
   <section class="section section--stripe">
     <div class="container strip">
       <div>
-        <h2>Code and chaos, deliberately mixed</h2>
+        <h2>Discipline with room for momentum</h2>
         <p>
-          The same mindset that obsesses over test coverage and clean boundaries also loves loud guitars and
-          perfectly choreographed stages. That tension keeps systems disciplined without becoming dull.
+          Good engineering balances clarity with pace. The goal isn't perfection — it's systems that stay understandable and resilient as they evolve.
         </p>
       </div>
 

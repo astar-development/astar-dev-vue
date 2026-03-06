@@ -30,7 +30,7 @@ const services: Service[] = [
       <div class="section__head">
         <h2>What You Actually Get</h2>
         <p>
-          No slide decks for the shelf. Concrete changes to how your system behaves and how your team works.
+          Concrete improvements to how your system behaves and how your team works — not slide decks or abstract diagrams.
         </p>
         <span>Typically 2-12 weeks, shaped around your team and constraints.</span>
       </div>

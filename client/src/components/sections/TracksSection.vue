@@ -28,8 +28,8 @@ const tracks: Track[] = [
   <section id="tracks" class="section section--solid section--top-border">
     <div class="container">
       <div class="section__head">
-        <h2>Setlist: How Engagements Flow</h2>
-        <p>A structured path from context to a system your team can confidently own.</p>
+        <h2>How engagements typically run</h2>
+        <p>A structured path from understanding your context to leaving you with a system you can confidently own.</p>
       </div>
 
       <div class="track-grid">

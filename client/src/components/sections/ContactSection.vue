@@ -2,10 +2,9 @@
   <section id="contact" class="section section--solid section--top-border">
     <div class="container contact">
       <div>
-        <h2>Let Us Talk About Your System</h2>
+        <h2>Let’s talk about your system</h2>
         <p>
-          If your architecture, pipelines, or observability feel more like noise than music, a short conversation can
-          help.
+          If your architecture, pipelines, or observability feel harder to reason about than they should, a short conversation can clarify what to change first.
         </p>
         <p>
           Share a brief outline of your context. You will receive a considered response, not a sales sequence.
