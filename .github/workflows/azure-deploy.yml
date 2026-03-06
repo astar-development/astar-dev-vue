@@ -1,0 +1,100 @@
+name: Build and Deploy to Azure Web App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20.x'
+  AZURE_WEBAPP_NAME: astar-dev-vue   # Change this to your Azure Web App name
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install all dependencies
+        run: npm install
+
+      - name: Build Vue client
+        run: npm run build:client
+
+      - name: Build Express server
+        run: npm run build:server
+
+      - name: Prepare deployment package
+        run: |
+          mkdir -p deploy
+          # Copy compiled server
+          cp -r server/dist deploy/
+          cp server/package.json deploy/
+          # Copy the root lock file for reproducible installs
+          cp package-lock.json deploy/
+          # Copy built client into expected location relative to server dist
+          mkdir -p deploy/client
+          cp -r client/dist deploy/client/dist
+          # Write a minimal package.json for the Azure Web App root
+          cat > deploy/package.json << 'EOF'
+          {
+            "name": "astar-dev-vue-deploy",
+            "version": "1.0.0",
+            "main": "dist/index.js",
+            "scripts": {
+              "start": "node dist/index.js"
+            },
+            "dependencies": {
+              "express": "^4.18.2",
+              "express-rate-limit": "^8.3.0",
+              "helmet": "^7.1.0"
+            }
+          }
+          EOF
+
+      - name: Install production dependencies in deploy folder
+        run: npm install --omit=dev --package-lock-only=false
+        working-directory: deploy
+
+      - name: Upload artifact for deployment
+        uses: actions/upload-artifact@v4
+        with:
+          name: webapp-build
+          path: deploy/
+          retention-days: 1
+
+  deploy:
+    name: Deploy to Azure Web App
+    runs-on: ubuntu-latest
+    needs: build
+    permissions: {}
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.webapp-url }}
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: webapp-build
+          path: deploy/
+
+      - name: Deploy to Azure Web App
+        id: deploy
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: deploy/
