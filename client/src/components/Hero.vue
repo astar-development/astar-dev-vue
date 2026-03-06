@@ -12,7 +12,7 @@ const navItems: { label: string; href: string }[] = [
   <header class="hero">
     <div class="topbar">
       <div class="topbar__brand">
-        <span class="topbar__logo">*</span>
+        <span class="topbar__logo"><img src="astar.png" alt="AStar"/></span>
         <div>
           <p class="topbar__title">AStar Development</p>
           <p class="topbar__subtitle">Architecture, pipelines, observability</p>
