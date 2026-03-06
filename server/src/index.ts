@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
+import fs from 'fs'
 import path from 'path'
 
 const app = express()
@@ -38,7 +39,17 @@ app.get('/api/health', (_req: Request, res: Response): void => {
 })
 
 // Serve the compiled Vue frontend
-const clientDist = path.join(__dirname, '../../client/dist')
+const clientDistCandidates = [
+  // Local monorepo run: server/dist -> ../../client/dist
+  path.resolve(__dirname, '../../client/dist'),
+  // Azure deploy artifact run: dist -> ../client/dist
+  path.resolve(__dirname, '../client/dist'),
+]
+
+const clientDist =
+  clientDistCandidates.find((candidate) => fs.existsSync(path.join(candidate, 'index.html'))) ??
+  clientDistCandidates[0]
+
 app.use(express.static(clientDist))
 
 // Fall back to index.html for client-side routing
