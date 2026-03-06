@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "type-check": "vue-tsc --noEmit",
+    "test:ci": "vitest run --coverage",
+    "lint": "eslint .",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
