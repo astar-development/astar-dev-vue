@@ -1,4 +1,6 @@
 name: Coverage Pages
+permissions:
+  contents: read
 
 on:
   push:
@@ -23,6 +25,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: client/coverage
+          
   deploy:
     needs: coverage
     runs-on: ubuntu-latest

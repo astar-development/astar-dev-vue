@@ -1,4 +1,6 @@
 name: Mutation Testing
+permissions:
+  contents: read
 
 on:
   workflow_dispatch:
