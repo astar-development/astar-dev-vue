@@ -19,8 +19,8 @@ jobs:
 
       - run: npm install
 
-      - run: npm run test:coverage --workspace=client
-      - run: npm run test:coverage --workspace=server || echo "No server tests"
+      - run: npx vitest run -c tests/client/vitest.config.ts --coverage
+      - run: npx vitest run -c tests/server/vitest.config.ts --coverage || echo "No server tests"
 
       - name: Prepare coverage site
         run: |
