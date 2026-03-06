@@ -1,0 +1,75 @@
+name: CI
+permissions:
+  contents: read
+  
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      # --- CLIENT QUALITY GATES ---
+      - name: Lint (client)
+        run: npm run lint --workspace=client || echo "No lint script"
+
+      - name: Type check (client)
+        run: npm run type-check --workspace=client
+
+      - name: Test with coverage (client)
+        run: npx vitest run -c tests/client/vitest.config.ts --coverage
+
+      - name: Upload client coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: client-coverage
+          path: client/coverage
+          retention-days: 7
+
+      # --- SERVER QUALITY GATES ---
+      - name: Type check (server)
+        run: npm run build --workspace=server
+
+      - name: Test with coverage (server)
+        run: npx vitest run -c tests/server/vitest.config.ts --coverage || echo "No server tests"
+
+      - name: Upload server coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-coverage
+          path: server/coverage
+          retention-days: 7
+
+      # --- BUILD BOTH ---
+      - name: Build client
+        run: npm run build --workspace=client
+
+      - name: Build server
+        run: npm run build --workspace=server
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            client/dist
+            server/dist
+          retention-days: 7

@@ -58,19 +58,24 @@ if (clientDist) {
   app.use(express.static(clientDist))
 }
 
-// Fall back to index.html for client-side routing
-app.get('*', (_req: Request, res: Response): void => {
+// Serve static frontend
+if (clientDist) {
+  app.use(express.static(clientDist))
+}
+
+// Only fallback for non-API routes
+app.get(/^\/(?!api).*/, (_req, res) => {
   if (!clientDist) {
-    res.status(503).json({
+    return res.status(503).json({
       error: 'Frontend Not Available',
-      message: 'No built frontend found. Expected index.html in one of the candidate paths.',
+      message: 'No built frontend found.',
       candidates: clientDistCandidates,
     })
-    return
   }
 
   res.sendFile(path.join(clientDist, 'index.html'))
 })
+
 
 // Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction): void => {

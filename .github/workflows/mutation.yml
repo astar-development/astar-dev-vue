@@ -1,0 +1,29 @@
+name: Mutation Testing
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mutation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install
+
+      - name: Run Stryker (client)
+        run: npx stryker run --workspace=client
+
+      - name: Upload mutation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mutation-report
+          path: client/reports/mutation
+          retention-days: 7
