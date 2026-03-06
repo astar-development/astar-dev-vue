@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     environment: 'jsdom',
-    include: ['tests/client/**/*.test.ts'],
+    include: ['../tests/client/**/*.test.ts'],
     coverage: {
       reporter: ['text', 'lcov'],
     },
