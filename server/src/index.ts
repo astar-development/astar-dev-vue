@@ -7,7 +7,6 @@ import path from 'path'
 const app = express()
 const PORT: number = parseInt(process.env.PORT ?? '3000', 10)
 
-// Security headers
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -21,7 +20,6 @@ app.use(
   }),
 )
 
-// Rate limiting – protect all routes from abuse
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 200,
@@ -30,7 +28,6 @@ const limiter = rateLimit({
 })
 app.use(limiter)
 
-// Parse JSON bodies
 app.use(express.json())
 
 // Health-check endpoint
@@ -38,15 +35,10 @@ app.get('/api/health', (_req: Request, res: Response): void => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
-// Serve the compiled Vue frontend
 const clientDistCandidates = [
-  // Preferred for Azure/App Service: runtime CWD usually /home/site/wwwroot
   path.resolve(process.cwd(), 'client/dist'),
-  // Alternate runtime CWD if app root is one level above wwwroot
   path.resolve(process.cwd(), 'wwwroot/client/dist'),
-  // Local monorepo run: server/dist -> ../../client/dist
   path.resolve(__dirname, '../../client/dist'),
-  // Azure deploy artifact run: dist -> ../client/dist
   path.resolve(__dirname, '../client/dist'),
 ]
 
@@ -58,12 +50,10 @@ if (clientDist) {
   app.use(express.static(clientDist))
 }
 
-// Serve static frontend
 if (clientDist) {
   app.use(express.static(clientDist))
 }
 
-// Only fallback for non-API routes
 app.get(/^\/(?!api).*/, (_req, res) => {
   if (!clientDist) {
     return res.status(503).json({
@@ -76,8 +66,6 @@ app.get(/^\/(?!api).*/, (_req, res) => {
   res.sendFile(path.join(clientDist, 'index.html'))
 })
 
-
-// Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction): void => {
   const errorId = Date.now().toString(36)
   console.error(`[${errorId}]`, err.stack)
