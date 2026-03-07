@@ -27,6 +27,8 @@ jobs:
           path: client/coverage
           
   deploy:
+    environment:
+      name: github-pages
     needs: coverage
     runs-on: ubuntu-latest
     permissions:
