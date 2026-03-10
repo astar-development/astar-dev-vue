@@ -31,13 +31,13 @@ const logoUrl = computed(() => {
         </div>
       </div>
       
-      <div class="topbar__nav">
-        <ThemeSwitcher />
-      </div>
     </div>
 
     <div class="hero__content">
-      <p class="hero__eyebrow">PRODUCTION // CLARITY</p>
+      <div class="hero__eyebrow-row">
+        <p class="hero__eyebrow">PRODUCTION // CLARITY</p>
+        <ThemeSwitcher />
+      </div>
 
       <h1 class="hero__title">
         Production‑grade .NET systems, designed to stay calm under load.
@@ -89,6 +89,7 @@ const logoUrl = computed(() => {
   margin-top: 0px;
   display: flex;
   gap: 16px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -97,6 +98,8 @@ const logoUrl = computed(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  justify-content: center;
+  margin-bottom: 32px;
 }
 
 .topbar__title {
@@ -113,6 +116,7 @@ const logoUrl = computed(() => {
 .topbar__subtitle {
   color: var(--hero-subtitle);
   transition: color var(--transition-speed);
+  width: max-content;
 }
 
 .topbar__link {
@@ -127,19 +131,33 @@ const logoUrl = computed(() => {
 .hero__title {
   color: var(--hero-title);
   transition: color var(--transition-speed);
+  font-size: clamp(2.1rem,5vw,3.6rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 32px;
 }
 
 .hero__subtitle {
   color: var(--hero-subtitle);
   transition: color var(--transition-speed);
+  text-align: center;
 }
 
 .hero__eyebrow {
   color: var(--hero-eyebrow);
   transition: color var(--transition-speed);
+  margin-bottom: 14px;
+  letter-spacing: .25em;
+  font-size: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .hero__tag {
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: .78rem;
   border: 1px solid var(--hero-tag-border);
   background: var(--hero-tag-bg);
   color: var(--hero-title);
@@ -223,6 +241,7 @@ const logoUrl = computed(() => {
 .hero {
   border-bottom: 1px solid var(--panel-border);
   padding: var(--hero-padding-top) 24px 84px;
+  justify-content: center;
 
   background:
     var(--hero-gradient),
@@ -241,6 +260,23 @@ const logoUrl = computed(() => {
 .theme-metal .topbar,
 .theme-polished .topbar {
   align-items: flex-start !important;
+}
+.hero__eyebrow-row {
+  display: flex;
+  justify-content: center;   /* centers the whole row under the logo */
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+.hero__eyebrow-row .theme-select {
+  margin: 0;  
+  margin-left: 24px; /* small spacing so it doesn't crowd the eyebrow */
+}
+
+.hero__eyebrow-row .theme-select {
+  position: relative;
+  top: -10px;
 }
 
 </style>
