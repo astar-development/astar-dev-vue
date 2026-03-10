@@ -73,7 +73,7 @@ const logoUrl = computed(() => {
 .topbar {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 24px;
+  padding: var(--topbar-padding);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,11 +82,11 @@ const logoUrl = computed(() => {
 .hero__content {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 48px 24px 0;
+  padding: var(--hero-content-padding-top) 24px 0;
 }
 
 .hero__actions {
-  margin-top: 32px;
+  margin-top: 0px;
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
@@ -148,18 +148,38 @@ const logoUrl = computed(() => {
 
 .logo {
   width: var(--logo-size);
-  height: var(--logo-size);
+  height: auto;
   object-fit: contain;
   transition: width var(--transition-speed), height var(--transition-speed);
 }
 
-.topbar__brand > div {
-  /* When centered, center the text too */
-  text-align: calc(var(--logo-center) * 1px) center;
+.theme-metal .logo,
+.theme-polished .logo {
+  margin-top: -0px;
 }
+
+.theme-metal .topbar,
+.theme-polished .topbar {
+  align-items: flex-start;
+}
+
+.topbar__brand > div {
+  text-align: left;
+}
+
+.theme-metal .topbar__brand > div,
+.theme-polished .topbar__brand > div {
+  text-align: center;
+}
+
 .topbar__brand {
   flex: calc(var(--logo-center) * 1);
 }
+
+.topbar__nav {
+  flex-shrink: 0;
+}
+
 .topbar__brand {
   display: flex;
   flex-direction: var(--logo-align);
@@ -216,6 +236,17 @@ const logoUrl = computed(() => {
     color var(--transition-speed),
     background var(--transition-speed),
     border-color var(--transition-speed);
+}
+
+.theme-metal .topbar__brand,
+.theme-polished .topbar__brand {
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.theme-metal .topbar,
+.theme-polished .topbar {
+  align-items: flex-start !important;
 }
 
 </style>

@@ -1,6 +1,11 @@
 :root {
   --transition-speed: 0.25s;
 }
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 
 /* ----------------------------- */
 /* TRADITIONAL DARK (default)    */
@@ -35,6 +40,9 @@
   --logo-size: 50px;
   --logo-align: row; /* row = logo left, column = logo centered */
   --logo-center: 0;  /* 0 = left, 1 = centered */
+  --hero-padding-top: 24px;
+
+  --hero-content-padding-top: 48px;
 }
 
 /* ----------------------------- */
@@ -66,7 +74,9 @@
   linear-gradient(165deg, #ffffff 0%, #f7f7f7 50%, #ededed 100%);
   --logo-size: 50px;
   --logo-align: row; /* row = logo left, column = logo centered */
-  --logo-center: 0;  /* 0 = left, 1 = centered */
+  --logo-center: 0;  /* 0 = left, 1 = centered */--hero-padding-top: 24px;
+
+  --hero-content-padding-top: 48px;
 }
 
 /* ----------------------------- */
@@ -96,11 +106,13 @@
   --hero-gradient:
   radial-gradient(circle at 80% 10%, rgba(76, 195, 255, 0.25), transparent 40%),
   linear-gradient(165deg, #000000 0%, #050a12 50%, #0a0f18 100%);
-  --logo-size: 640px;
+  --logo-size: 480px;
   --logo-align: column; /* row = logo left, column = logo centered */
   --logo-center: 1;  /* 0 = left, 1 = centered */
-  --hero-padding-top: 8px;
+  --hero-padding-top: 4px;
+--topbar-padding: 0px;
 
+  --hero-content-padding-top: 16px;
 }
 
 /* ----------------------------- */
@@ -132,11 +144,13 @@
   --hero-gradient:
   radial-gradient(circle at 80% 10%, rgba(255, 45, 170, 0.25), transparent 40%),
   linear-gradient(165deg, #ffffff 0%, #fff5fb 50%, #ffe9f5 100%);
-  --logo-size: 640px;
+  --logo-size: 480px;
   --logo-align: column; /* row = logo left, column = logo centered */
   --logo-center: 1;  /* 0 = left, 1 = centered */
-  --hero-padding-top: 8px;
+  --hero-padding-top: 4px;
+--topbar-padding: 0px;
 
+  --hero-content-padding-top: 16px;
 }
 
 /* Apply variables */
