@@ -146,12 +146,13 @@ const logoUrl = computed(() => {
 .hero__eyebrow {
   color: var(--hero-eyebrow);
   transition: color var(--transition-speed);
-  margin-bottom: 14px;
+  margin: 0px;
   letter-spacing: .25em;
   font-size: .65rem;
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
+  line-height: 1.2;
 }
 
 .hero__tag {
@@ -276,7 +277,6 @@ const logoUrl = computed(() => {
 
 .hero__eyebrow-row .theme-select {
   position: relative;
-  top: -10px;
 }
 
 </style>
