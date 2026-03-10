@@ -163,17 +163,16 @@ const logoUrl = computed(() => {
   align-items: flex-start;
 }
 
+/* Default: traditional themes */
 .topbar__brand > div {
+  min-width: 0;
   text-align: left;
 }
 
+/* Me themes only */
 .theme-metal .topbar__brand > div,
 .theme-polished .topbar__brand > div {
   text-align: center;
-}
-
-.topbar__brand {
-  flex: calc(var(--logo-center) * 1);
 }
 
 .topbar__nav {
@@ -185,8 +184,9 @@ const logoUrl = computed(() => {
   flex-direction: var(--logo-align);
   align-items: center;
   gap: 12px;
-  text-align: left;
 
+  /* Centering logic */
+  flex: calc(var(--logo-center) * 1);
   margin-left: calc(var(--logo-center) * auto);
   margin-right: calc(var(--logo-center) * auto);
 }
@@ -236,12 +236,6 @@ const logoUrl = computed(() => {
     color var(--transition-speed),
     background var(--transition-speed),
     border-color var(--transition-speed);
-}
-
-.theme-metal .topbar__brand,
-.theme-polished .topbar__brand {
-  flex-direction: column !important;
-  align-items: center !important;
 }
 
 .theme-metal .topbar,
