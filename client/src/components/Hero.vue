@@ -6,15 +6,17 @@ import ThemeSwitcher from '../components/ThemeSwitcher.vue'
 const { theme } = useTheme()
 
 const logoUrl = computed(() => {
-  // This makes theme.value part of the dependency graph
-  const currentTheme = theme.value
-  console.log('Current theme:', currentTheme)
-
-  return getComputedStyle(document.documentElement)
-    .getPropertyValue('--logo-url')
-    .replace('url(', '')
-    .replace(')', '')
-    .trim()
+  switch (theme.value) {
+    case 'metal':
+      return '/assets/metal-logo.png'
+    case 'polished':
+      return '/assets/polished-logo.png'
+    case 'light':
+      return '/assets/astar.png'
+    case 'dark':
+    default:
+      return '/assets/astar.png'
+  }
 })
 
 </script>
