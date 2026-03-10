@@ -24,7 +24,7 @@ const logoUrl = computed(() => {
     <div class="topbar">
       
       <div class="topbar__brand">
-        <img class="logo" :src="logoUrl" alt="Logo" />
+        <img :src="logoUrl + '?v=' + theme" class="logo" alt="Logo" />
         <div>
           <div class="topbar__title">AStar Development</div>
           <div class="topbar__subtitle">Software Architecture & Branding</div>
