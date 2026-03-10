@@ -1,31 +1,39 @@
 <script setup lang="ts">
-const navItems: { label: string; href: string }[] = [
-  { label: 'Services', href: '#services' },
-  { label: 'NuGet', href: '#packages' },
-  { label: 'Setlist', href: '#tracks' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Contact', href: '#contact' },
-]
+import { computed } from 'vue'
+import { useTheme } from '../composables/useTheme'
+import ThemeSwitcher from '../components/ThemeSwitcher.vue'
+
+const { theme } = useTheme()
+
+const logoUrl = computed(() => {
+  // This makes theme.value part of the dependency graph
+  const currentTheme = theme.value
+  console.log('Current theme:', currentTheme)
+
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue('--logo-url')
+    .replace('url(', '')
+    .replace(')', '')
+    .trim()
+})
+
 </script>
 
 <template>
   <header class="hero">
     <div class="topbar">
+      
       <div class="topbar__brand">
-        <span class="topbar__logo">
-          <img src="./../../public/astar.png" alt="AStar" style="width:50px; height: 50px;" />
-        </span>
+        <img class="logo" :src="logoUrl" alt="Logo" />
         <div>
-          <p class="topbar__title">AStar Development</p>
-          <p class="topbar__subtitle">Architecture, software, pipelines, and observability with real momentum</p>
+          <div class="topbar__title">AStar Development</div>
+          <div class="topbar__subtitle">Software Architecture & Branding</div>
         </div>
       </div>
-
-      <nav class="topbar__nav" aria-label="Primary">
-        <a v-for="item in navItems" :key="item.label" :href="item.href" class="topbar__link">
-          {{ item.label }}
-        </a>
-      </nav>
+      
+      <div class="topbar__nav">
+        <ThemeSwitcher />
+      </div>
     </div>
 
     <div class="hero__content">
@@ -61,123 +69,106 @@ const navItems: { label: string; href: string }[] = [
   </header>
 </template>
 
-<style scoped>
-.hero {
-  border-bottom: 1px solid #26303d;
-  padding: 24px 24px 84px;
-  background:
-    radial-gradient(circle at 86% 9%, rgba(45, 212, 191, 0.18), transparent 30%),
-    radial-gradient(circle at 5% 0%, rgba(251, 146, 60, 0.18), transparent 30%),
-    linear-gradient(165deg, #09131f 0%, #07121d 50%, #0f1a26 100%);
-}
-
+<style>
 .topbar {
   max-width: 1120px;
   margin: 0 auto;
+  padding: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-}
-
-.topbar__brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.topbar__logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  font-weight: 700;
-}
-
-.topbar__title {
-  color: #f3f6fb;
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.topbar__subtitle {
-  color: #89a0b6;
-  font-size: 0.78rem;
-}
-
-.topbar__nav {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.topbar__link {
-  color: #b8cadb;
-  text-decoration: none;
-  font-size: 0.82rem;
-}
-
-.topbar__link:hover {
-  color: #2dd4bf;
 }
 
 .hero__content {
-  max-width: 920px;
-  margin: 56px auto 0;
-  text-align: center;
-}
-
-.hero__title {
-  font-size: clamp(2.1rem, 5vw, 3.6rem);
-  font-weight: 700;
-  color: #f3f6fb;
-  line-height: 1.2;
-  margin-bottom: 14px;
-}
-
-.hero__subtitle {
-  font-size: 1.08rem;
-  color: #b5c5d5;
-  margin-bottom: 24px;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero__eyebrow {
-  margin-bottom: 14px;
-  letter-spacing: 0.25em;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #f0abfc;
-  text-transform: uppercase;
-}
-
-.hero__tags {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
-}
-
-.hero__tag {
-  border: 1px solid #324255;
-  border-radius: 999px;
-  padding: 6px 12px;
-  font-size: 0.78rem;
-  color: #c9d7e4;
-  background: rgba(12, 24, 35, 0.8);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 24px 0;
 }
 
 .hero__actions {
+  margin-top: 32px;
   display: flex;
-  gap: 12px;
-  justify-content: center;
+  gap: 16px;
   flex-wrap: wrap;
+}
+
+.hero__tags {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.topbar__title {
+  color: var(--hero-title);
+  transition: color var(--transition-speed);
+}
+
+.topbar__nav select {
+  color: var(--text);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+}
+
+.topbar__subtitle {
+  color: var(--hero-subtitle);
+  transition: color var(--transition-speed);
+}
+
+.topbar__link {
+  color: var(--hero-link);
+  transition: color var(--transition-speed);
+}
+
+.topbar__link:hover {
+  color: var(--hero-link-hover);
+}
+
+.hero__title {
+  color: var(--hero-title);
+  transition: color var(--transition-speed);
+}
+
+.hero__subtitle {
+  color: var(--hero-subtitle);
+  transition: color var(--transition-speed);
+}
+
+.hero__eyebrow {
+  color: var(--hero-eyebrow);
+  transition: color var(--transition-speed);
+}
+
+.hero__tag {
+  border: 1px solid var(--hero-tag-border);
+  background: var(--hero-tag-bg);
+  color: var(--hero-title);
+  transition: background var(--transition-speed), border-color var(--transition-speed), color var(--transition-speed);
+}
+
+.logo {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  object-fit: contain;
+  transition: width var(--transition-speed), height var(--transition-speed);
+}
+
+.topbar__brand > div {
+  /* When centered, center the text too */
+  text-align: calc(var(--logo-center) * 1px) center;
+}
+.topbar__brand {
+  flex: calc(var(--logo-center) * 1);
+}
+.topbar__brand {
+  display: flex;
+  flex-direction: var(--logo-align);
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+
+  margin-left: calc(var(--logo-center) * auto);
+  margin-right: calc(var(--logo-center) * auto);
 }
 
 .btn {
@@ -187,39 +178,44 @@ const navItems: { label: string; href: string }[] = [
   font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: var(--btn-shadow);
+  transition:
+    background var(--transition-speed),
+    color var(--transition-speed),
+    border-color var(--transition-speed),
+    box-shadow var(--transition-speed),
+    transform 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .btn:hover {
+  border-color: var(--btn-hover-border);
+  background: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+  box-shadow: var(--btn-shadow);
   transform: translateY(-1px);
   opacity: 0.95;
 }
 
-.btn--primary {
-  background: #2dd4bf;
-  color: #0f1a26;
-  border: 1px solid #5de0d0;
+.hero {
+  border-bottom: 1px solid var(--panel-border);
+  padding: var(--hero-padding-top) 24px 84px;
+
+  background:
+    var(--hero-gradient),
+    var(--hero-bg);
+
+  transition: background var(--transition-speed), border-color var(--transition-speed);
 }
 
-.btn--secondary {
-  background: transparent;
-  color: #d6e5f4;
-  border: 1px solid #3a4a5d;
+.hero * {
+  transition:
+    color var(--transition-speed),
+    background var(--transition-speed),
+    border-color var(--transition-speed);
 }
 
-.btn--secondary:hover {
-  border-color: #2dd4bf;
-}
-
-@media (max-width: 860px) {
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .topbar__nav {
-    width: 100%;
-    gap: 12px;
-  }
-}
 </style>

@@ -22,10 +22,8 @@ import Footer from './components/Footer.vue'
 }
 
 body {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: #08131f;
-  color: #e8f1fa;
-  line-height: 1.6;
+  background-color: var(--background);
+  color: var(--text);
 }
 
 html {
